@@ -104,12 +104,13 @@ export default function Blog() {
   ];
 
   // NEW detection function (7 days)
-  const isNewPost = (date) => {
-    const postDate = new Date(date);
-    const today = new Date();
-    const diff = (today - postDate) / (1000 * 60 * 60 * 24);
-    return diff <= 7;
-  };
+  // NEW detection function (7 days)
+const isNewPost = (date: string): boolean => {
+  const postDate = new Date(date);
+  const today = new Date();
+  const diff = (today.getTime() - postDate.getTime()) / (1000 * 60 * 60 * 24);
+  return diff <= 7;
+};
 
   // Search + Filter Logic
   const filteredPosts = useMemo(() => {
