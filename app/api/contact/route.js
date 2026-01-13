@@ -1,5 +1,8 @@
+// app/api/contact/route.js
 import { connectDB } from "@/lib/mongodb";
-import contact from "@/models/contact";
+import Contact from "@/models/contact";
+
+export const runtime = "nodejs";
 
 export async function POST(req) {
   try {
@@ -14,22 +17,16 @@ export async function POST(req) {
 
     await connectDB();
 
-    await contact.create({ name, email, message });
+    await Contact.create({ name, email, message });
 
     return new Response(
-      JSON.stringify({
-        success: true,
-        message: "Your request has been submitted successfully!",
-      }),
+      JSON.stringify({ success: true, message: "Your request has been submitted successfully!" }),
       { status: 201 }
     );
   } catch (error) {
-    console.error(error);
+    console.error("Contact form error:", error);
     return new Response(
-      JSON.stringify({
-        success: false,
-        message: "Something went wrong, please try again",
-      }),
+      JSON.stringify({ success: false, message: "Something went wrong, please try again" }),
       { status: 500 }
     );
   }
