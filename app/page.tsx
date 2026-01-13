@@ -20,7 +20,7 @@ export default function Home() {
         >
           <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl border-4 border-blue-500">
             <Image
-              src="/me1.jpg"
+              src="/me1.png"
               alt="Nagaraja"
               fill
               className="object-cover"
