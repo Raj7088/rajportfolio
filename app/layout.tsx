@@ -19,7 +19,7 @@ export const metadata = {
   description: "Corporate Trainer | MERN | Javascript",
   openGraph: {
     title: "Professional Technical Trainer",
-    description: "Corporate Trainer | DevOps | Cloud",
+    description: "Technical Trainer | MERN | Javascript | NextJS",
     url: "https://your-domain.com",
     type: "website",
     siteName: "Nagaraj | Technical Trainer",
