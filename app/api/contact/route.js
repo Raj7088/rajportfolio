@@ -1,5 +1,5 @@
 import { connectDB } from "@/lib/mongodb";
-import Contact from "@/models/contact";
+import contact from "@/models/contact";
 
 export async function POST(req) {
   try {
@@ -14,7 +14,7 @@ export async function POST(req) {
 
     await connectDB();
 
-    await Contact.create({ name, email, message });
+    await contact.create({ name, email, message });
 
     return new Response(
       JSON.stringify({
