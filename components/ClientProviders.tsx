@@ -10,12 +10,26 @@ import {
   Settings,
   Phone,
   BookOpen,
-  Calendar,
   Award,
   Users,
   ChevronDown,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+
+//
+// ✅ Types
+//
+type NavSubItem = {
+  label: string;
+  href: string;
+};
+
+type NavItem = {
+  name: string;
+  href: string;
+  icon: React.ReactNode;
+  submenu?: NavSubItem[]; // optional submenu
+};
 
 export default function ClientProviders({
   children,
@@ -26,17 +40,26 @@ export default function ClientProviders({
   const [open, setOpen] = useState(false);
   const [dropdown, setDropdown] = useState<string | null>(null);
 
-  const navItems = [
+  //
+  // ✅ Navigation Items
+  //
+  const navItems: NavItem[] = [
     { name: "Home", href: "/", icon: <Home size={18} /> },
     { name: "About", href: "/about", icon: <Info size={18} /> },
+
     {
-      name: "Services", href:"/services",
+      name: "Services",
+      href: "/services",
       icon: <Settings size={18} />,
-     
+      // 👇 You can add submenu items later if you want
+      // submenu: [
+      //   { label: "Web Development", href: "/services/web" },
+      //   { label: "Training", href: "/services/training" },
+      // ],
     },
+
     { name: "Contact", href: "/contact", icon: <Phone size={18} /> },
     { name: "MyBlog", href: "/blog", icon: <BookOpen size={18} /> },
-    
     { name: "Experience", href: "/experience", icon: <Users size={18} /> },
     { name: "Certificates", href: "/certificate", icon: <Award size={18} /> },
     { name: "Clients", href: "/clients", icon: <Users size={18} /> },
@@ -46,8 +69,7 @@ export default function ClientProviders({
     <ThemeProvider attribute="class" defaultTheme="dark">
       <header className="sticky top-0 z-50 backdrop-blur-2xl bg-black/60 border-b border-white/20 shadow-[0_0_25px_#00ffff]">
         <div className="w-full px-4 py-4 flex items-center justify-between">
-
-          {/* LOGO — now truly left corner */}
+          {/* LOGO */}
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}>
             <Link
               href="/"
@@ -59,7 +81,6 @@ export default function ClientProviders({
 
           {/* Desktop Navbar */}
           <nav className="hidden md:flex gap-16 items-center">
-
             {navItems.map((item) => (
               <div
                 key={item.name}
@@ -75,8 +96,9 @@ export default function ClientProviders({
                   {item.icon}
                   {item.name}
                   {item.submenu && <ChevronDown size={16} />}
+
                   <span
-                    className={`absolute left-0 -bottom-1 h-[2px] w-full transition-all duration-300 
+                    className={`absolute left-0 -bottom-1 h-[2px] w-full transition-all duration-300
                     ${pathname === item.href ? "bg-cyan-400" : "group-hover:bg-pink-400"}`}
                   />
                 </Link>

@@ -6,10 +6,24 @@ import { useRouter } from "next/navigation";
 export default function Blog() {
   const router = useRouter();
 
-  const [selectedPost, setSelectedPost] = useState(null);
+  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
   const [visible, setVisible] = useState(6); // load more control
+
+  type Post = {
+  title: string;
+  date: string;
+  category: string;
+  description: string;
+  image: string;
+  longContent: string;
+  batchTime: string;
+  batchStart: string;
+  delay: string;
+};
+
 
   const posts = [
     {
