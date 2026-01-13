@@ -18,13 +18,32 @@ export default function BookSlotPage() {
 
   const today = new Date().toISOString().split("T")[0];
 
-  const handleBooking = () => {
-    if (!selectedDate || !selectedSlot) {
-      alert("Please select a date and a slot!");
-      return;
-    }
+ const handleBooking = async () => {
+  if (!selectedDate || !selectedSlot) {
+    alert("Please select a date and a slot!");
+    return;
+  }
+
+  const res = await fetch("/api/book-slot", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      date: selectedDate,
+      slot: selectedSlot
+    })
+  });
+
+  const data = await res.json();
+
+  if (data.success) {
     setConfirmed(true);
-  };
+  } else {
+    alert("Failed to book slot. Try again!");
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
